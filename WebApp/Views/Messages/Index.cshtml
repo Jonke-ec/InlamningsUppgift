@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WebApp.Models.MessageEntity>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="center">
+    <h1>Meddelanden</h1>
+    <p>
+        <a asp-action="Create">Skapa nytt</a>
+    </p>
+</div>
+
+<table class="table">
+    <tbody>
+@foreach (var item in Model) {
+
+        <div class="container">
+            <div class="message">
+                <header>
+                    <div class="img-container">
+                        <img class="image-size" src="@Html.DisplayFor(modelItem => item.ImageUrl)">
+                    </div>
+                </header>
+                <div class="message-body">
+                        <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+                    @Html.Raw(item.Body)
+                </div>
+            </div>
+        </div>
+
+        <div class="edit-delete-message">
+            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+            <a asp-action="Delete" asp-route-id="@item.Id">Delete </a>
+        </div>
+}   
+    </tbody>
+</table>
